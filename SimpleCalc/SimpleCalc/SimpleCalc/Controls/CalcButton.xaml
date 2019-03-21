@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimpleCalc.Controls.CalcButton"
+             BackgroundColor="Transparent">
+  <ContentView.Content>
+        <Frame CornerRadius="12" BorderColor="Transparent" BackgroundColor="{Binding BackgroundColor}">
+            <Label HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="{Binding FontSize}" />
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+  </ContentView.Content>
+</ContentView>
