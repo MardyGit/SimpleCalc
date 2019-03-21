@@ -26,5 +26,10 @@ namespace SimpleCalc
         {
             Task.Run(() => Vm.DecimalTapHandler());
         }
+
+        private void SignButton_OnTapped(object sender, EventArgs e)
+        {
+            Task.Run(() => Vm.SignTapHandler());
+        }
     }
 }

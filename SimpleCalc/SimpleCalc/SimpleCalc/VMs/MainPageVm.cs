@@ -71,5 +71,21 @@ namespace SimpleCalc.VMs
 
             CurrentValue += ".";
         }
+
+        public void SignTapHandler()
+        {
+            if (CurrentValue.StartsWith("-"))
+            {
+                CurrentValue = CurrentValue.Substring(1);
+                return;
+            }
+
+            if (CurrentValue.Length == 10)
+            {
+                return;
+            }
+
+            CurrentValue = "-" + CurrentValue;
+        }
     }
 }

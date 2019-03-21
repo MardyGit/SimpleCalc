@@ -41,6 +41,11 @@ namespace SimpleCalc.Controls
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             OnTapped?.Invoke(this, EventArgs.Empty);
+            new Animation
+                {
+                    { 0d, .5d , new Animation(i => this.Scale = i, 1d, .9d) },
+                    { .5d, 1d , new Animation(i => this.Scale = i, .8d, 1d) },
+                }.Commit(this, "ClickAnimation", 16, 800, Easing.CubicInOut);
         }
     }
 }
