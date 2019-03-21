@@ -7,7 +7,7 @@
         <Frame CornerRadius="18" BorderColor="Transparent" BackgroundColor="{Binding BackgroundColor}">
             <Label Text="{Binding Text}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="{Binding FontSize}" />
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}"/>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
             </Frame.GestureRecognizers>
         </Frame>
   </ContentView.Content>

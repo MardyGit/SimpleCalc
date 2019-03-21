@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SimpleCalc.Controls
@@ -13,11 +14,11 @@ namespace SimpleCalc.Controls
             BindingContext = this;
         }
 
+        public event EventHandler OnTapped;
+
         public static readonly new BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(CalcButton), Color.White);
         public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CalcButton), null);
         public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(CalcButton), 18d);
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(Command), typeof(CalcButton), null);
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(CalcButton), null);
 
         public new Color BackgroundColor
         {
@@ -37,16 +38,9 @@ namespace SimpleCalc.Controls
             set => SetValue(FontSizeProperty, value);
         }
 
-        public Command Command
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            get => (Command)GetValue(CommandProperty);
-            set => SetValue(CommandProperty, value);
-        }
-
-        public object CommandParameter
-        {
-            get => GetValue(CommandParameterProperty);
-            set => SetValue(CommandParameterProperty, value);
+            OnTapped?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -7,7 +7,7 @@
 
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="660" HeightRequest="480" BackgroundColor="#020408" Padding="24, 12">
         <Frame CornerRadius="12" BackgroundColor="Transparent" BorderColor="#eeeeff" HasShadow="False" Padding="8" Margin="0" HorizontalOptions="Fill" VerticalOptions="Start">
-            <Label Text="{Binding CurrentValue, Mode=TwoWay}" BackgroundColor="Transparent" TextColor="#eeeeff" FontSize="Large" VerticalOptions="Fill" HorizontalOptions="Fill" HorizontalTextAlignment="End"/>
+            <Label Text="{Binding CurrentValue}" BackgroundColor="Transparent" TextColor="#eeeeff" FontSize="Large" VerticalOptions="Fill" HorizontalOptions="Fill" HorizontalTextAlignment="End"/>
         </Frame>
         <Label Text="{Binding ErrorMessage}" TextColor="Maroon" VerticalOptions="Start" HorizontalOptions="Fill" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
         <Grid>
@@ -28,20 +28,20 @@
             <controls:CalcButton Grid.Row="0" Grid.Column="1" Text="+/-" FontSize="24" BackgroundColor="#DCDCDC"/>
             <controls:CalcButton Grid.Row="0" Grid.Column="2" Text="%" FontSize="24" BackgroundColor="#DCDCDC"/>
             <controls:CalcButton Grid.Row="0" Grid.Column="3" Text="÷" FontSize="24" BackgroundColor="#DAA520"/>
-            <controls:CalcButton Grid.Row="1" Grid.Column="0" Text="7" FontSize="24" BackgroundColor="#696969"/>
-            <controls:CalcButton Grid.Row="1" Grid.Column="1" Text="8" FontSize="24" BackgroundColor="#696969"/>
-            <controls:CalcButton Grid.Row="1" Grid.Column="2" Text="9" FontSize="24" BackgroundColor="#696969"/>
+            <controls:CalcButton Grid.Row="1" Grid.Column="0" Text="7" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped" />
+            <controls:CalcButton Grid.Row="1" Grid.Column="1" Text="8" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
+            <controls:CalcButton Grid.Row="1" Grid.Column="2" Text="9" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
             <controls:CalcButton Grid.Row="1" Grid.Column="3" Text="X" FontSize="24" BackgroundColor="#DAA520"/>
-            <controls:CalcButton Grid.Row="2" Grid.Column="0" Text="4" FontSize="24" BackgroundColor="#696969"/>
-            <controls:CalcButton Grid.Row="2" Grid.Column="1" Text="5" FontSize="24" BackgroundColor="#696969"/>
-            <controls:CalcButton Grid.Row="2" Grid.Column="2" Text="6" FontSize="24" BackgroundColor="#696969"/>
+            <controls:CalcButton Grid.Row="2" Grid.Column="0" Text="4" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
+            <controls:CalcButton Grid.Row="2" Grid.Column="1" Text="5" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
+            <controls:CalcButton Grid.Row="2" Grid.Column="2" Text="6" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
             <controls:CalcButton Grid.Row="2" Grid.Column="3" Text="-" FontSize="24" BackgroundColor="#DAA520"/>
-            <controls:CalcButton Grid.Row="3" Grid.Column="0" Text="1" FontSize="24" BackgroundColor="#696969"/>
-            <controls:CalcButton Grid.Row="3" Grid.Column="1" Text="2" FontSize="24" BackgroundColor="#696969"/>
-            <controls:CalcButton Grid.Row="3" Grid.Column="2" Text="3" FontSize="24" BackgroundColor="#696969"/>
+            <controls:CalcButton Grid.Row="3" Grid.Column="0" Text="1" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
+            <controls:CalcButton Grid.Row="3" Grid.Column="1" Text="2" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
+            <controls:CalcButton Grid.Row="3" Grid.Column="2" Text="3" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped"/>
             <controls:CalcButton Grid.Row="3" Grid.Column="3" Text="+" FontSize="24" BackgroundColor="#DAA520"/>
-            <controls:CalcButton Grid.Row="4" Grid.Column="0" Text="0" FontSize="24" BackgroundColor="#696969" Grid.ColumnSpan="2"/>
-            <controls:CalcButton Grid.Row="4" Grid.Column="2" Text="." FontSize="24" BackgroundColor="#696969"/>
+            <controls:CalcButton Grid.Row="4" Grid.Column="0" Text="0" FontSize="24" BackgroundColor="#696969" Grid.ColumnSpan="2" OnTapped="NumberButton_OnTapped"/>
+            <controls:CalcButton Grid.Row="4" Grid.Column="2" Text="." FontSize="24" BackgroundColor="#696969" OnTapped="DecimalButton_OnTapped"/>
             <controls:CalcButton Grid.Row="4" Grid.Column="3" Text="=" FontSize="24" BackgroundColor="#DAA520"/>
         </Grid>
        
