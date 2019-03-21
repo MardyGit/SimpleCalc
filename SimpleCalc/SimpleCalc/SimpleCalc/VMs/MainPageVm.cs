@@ -87,5 +87,30 @@ namespace SimpleCalc.VMs
 
             CurrentValue = "-" + CurrentValue;
         }
+
+        public void AddTapHandler()
+        {
+       
+        }
+
+        public void SubtractTapHandler()
+        {
+
+        }
+
+        public void DivideTapHandler()
+        {
+
+        }
+
+        public void MultiplyTapHandler()
+        {
+
+        }
+
+        public void EqualsTapHandler()
+        {
+
+        }
     }
 }

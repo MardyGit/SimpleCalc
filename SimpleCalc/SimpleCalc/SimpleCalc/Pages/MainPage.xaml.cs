@@ -21,15 +21,39 @@ namespace SimpleCalc
         {
             Task.Run(() => Vm.NumberTapHandler(((CalcButton)sender).Text));
         }
-    
+
+        private void SignButton_OnTapped(object sender, EventArgs e)
+        {
+            Task.Run(() => Vm.SignTapHandler());
+        }
         private void DecimalButton_OnTapped(object sender, EventArgs e)
         {
             Task.Run(() => Vm.DecimalTapHandler());
         }
 
-        private void SignButton_OnTapped(object sender, EventArgs e)
+        private void AddButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.SignTapHandler());
+            Task.Run(() => Vm.AddTapHandler());
+        }
+
+        private void SubtractButton_OnTapped(object sender, EventArgs e)
+        {
+            Task.Run(() => Vm.SubtractTapHandler());
+        }
+
+        private void MultiplyButton_OnTapped(object sender, EventArgs e)
+        {
+            Task.Run(() => Vm.MultiplyTapHandler());
+        }
+
+        private void DivideButton_OnTapped(object sender, EventArgs e)
+        {
+            Task.Run(() => Vm.DivideTapHandler());
+        }
+
+        private void EqualsButton_OnTapped(object sender, EventArgs e)
+        {
+            Task.Run(() => Vm.EqualsTapHandler());
         }
     }
 }
