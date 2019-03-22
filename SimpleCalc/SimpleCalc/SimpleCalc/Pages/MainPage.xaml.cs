@@ -17,43 +17,49 @@ namespace SimpleCalc
 
         public MainPageVm Vm { get; } = new MainPageVm();
 
-        private void NumberButton_OnTapped(object sender, EventArgs e)
+        private async void CancelButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.NumberTapHandler(((CalcButton)sender).Text));
+            await Task.Run(() => Vm.CancelTapHandler());
         }
 
-        private void SignButton_OnTapped(object sender, EventArgs e)
+        private async void NumberButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.SignTapHandler());
-        }
-        private void DecimalButton_OnTapped(object sender, EventArgs e)
-        {
-            Task.Run(() => Vm.DecimalTapHandler());
+            await Task.Run(() => Vm.NumberTapHandler(((CalcButton)sender).Text));
         }
 
-        private void AddButton_OnTapped(object sender, EventArgs e)
+        private async void SignButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.AddTapHandler());
+            await Task.Run(() => Vm.SignTapHandler());
         }
 
-        private void SubtractButton_OnTapped(object sender, EventArgs e)
+        private async void DecimalButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.SubtractTapHandler());
+            await Task.Run(() => Vm.DecimalTapHandler());
         }
 
-        private void MultiplyButton_OnTapped(object sender, EventArgs e)
+        private async void AddButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.MultiplyTapHandler());
+            await Task.Run(() => Vm.AddTapHandler());
         }
 
-        private void DivideButton_OnTapped(object sender, EventArgs e)
+        private async void SubtractButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.DivideTapHandler());
+            await Task.Run(() => Vm.SubtractTapHandler());
         }
 
-        private void EqualsButton_OnTapped(object sender, EventArgs e)
+        private async void MultiplyButton_OnTapped(object sender, EventArgs e)
         {
-            Task.Run(() => Vm.EqualsTapHandler());
+            await Task.Run(() => Vm.MultiplyTapHandler());
+        }
+
+        private async void DivideButton_OnTapped(object sender, EventArgs e)
+        {
+            await Task.Run(() => Vm.DivideTapHandler());
+        }
+
+        private async void EqualsButton_OnTapped(object sender, EventArgs e)
+        {
+            await Task.Run(() => Vm.EqualsTapHandler());
         }
     }
 }

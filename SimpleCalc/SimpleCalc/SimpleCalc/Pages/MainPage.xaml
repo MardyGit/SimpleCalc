@@ -6,10 +6,9 @@
              MinimumHeightRequest="480" MinimumWidthRequest="660">
 
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="660" HeightRequest="480" BackgroundColor="#020408" Padding="24, 12">
-        <Frame CornerRadius="12" BackgroundColor="Transparent" BorderColor="#eeeeff" HasShadow="False" Padding="8" Margin="0" HorizontalOptions="Fill" VerticalOptions="Start">
-            <Label Text="{Binding CurrentValue}" BackgroundColor="Transparent" TextColor="#eeeeff" FontSize="Large" VerticalOptions="Fill" HorizontalOptions="Fill" HorizontalTextAlignment="End"/>
+        <Frame CornerRadius="12" BackgroundColor="Transparent" BorderColor="#eeeeff" HasShadow="False" Padding="8" Margin="0" HorizontalOptions="End" VerticalOptions="Start">
+            <Label Text="{Binding StringValue}" BackgroundColor="Transparent" TextColor="#eeeeff" FontSize="Large" VerticalOptions="Fill" HorizontalOptions="Fill" HorizontalTextAlignment="End" WidthRequest="400"/>
         </Frame>
-        <Label Text="{Binding ErrorMessage}" TextColor="Maroon" VerticalOptions="Start" HorizontalOptions="Fill" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -24,7 +23,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <controls:CalcButton Grid.Row="0" Grid.Column="0" Text="C" FontSize="24" BackgroundColor="#DCDCDC" Grid.ColumnSpan="2"/>
+            <controls:CalcButton Grid.Row="0" Grid.Column="0" Text="C" FontSize="24" BackgroundColor="#DCDCDC" Grid.ColumnSpan="2" OnTapped="CancelButton_OnTapped"/>
             <controls:CalcButton Grid.Row="0" Grid.Column="2" Text="+/-" FontSize="24" BackgroundColor="#DCDCDC" OnTapped="SignButton_OnTapped"/>
             <controls:CalcButton Grid.Row="0" Grid.Column="3" Text="÷" FontSize="24" BackgroundColor="#DAA520" OnTapped="DivideButton_OnTapped"/>
             <controls:CalcButton Grid.Row="1" Grid.Column="0" Text="7" FontSize="24" BackgroundColor="#696969" OnTapped="NumberButton_OnTapped" />

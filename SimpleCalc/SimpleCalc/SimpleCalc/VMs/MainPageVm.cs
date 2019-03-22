@@ -8,19 +8,32 @@ namespace SimpleCalc.VMs
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _currentValue = "0";
-        private string _errorMessage;
+        private enum Operations { None, Add, Subtract, Multiply, Divide }
 
-        public string CurrentValue
+        private const int MaxLength = 10;
+
+        private string _stringValue = "0";
+        private double _resultValue = 0;
+        private Operations _operation;
+        private bool _resetInput;
+
+        public const string ErrorState = "Error";
+
+        public double Value
         {
-            get => _currentValue;
-            set => HasPropertyChanged(value, ref _currentValue);
+            get
+            {
+                double.TryParse(StringValue, out var result);
+                return result;
+            }
         }
 
-        public string ErrorMessage
+        private bool IsInputValid => double.TryParse(StringValue, out var result);
+
+        public string StringValue
         {
-            get => _errorMessage;
-            set => HasPropertyChanged(value, ref _errorMessage);
+            get => _stringValue;
+            set => HasPropertyChanged(value, ref _stringValue);
         }
 
         protected bool HasPropertyChanged<T>(T newValue, ref T currentValue, [CallerMemberName] string propertyName = "")
@@ -37,19 +50,24 @@ namespace SimpleCalc.VMs
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            Device.BeginInvokeOnMainThread(() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)));
+            if (PropertyChanged != null)
+            {
+                Device.BeginInvokeOnMainThread(() => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)));
+            }
         }
 
         public void NumberTapHandler(string value)
         {
-            if (CurrentValue.Length == 10)
+            BeforeInput();
+
+            if (StringValue.Length == MaxLength)
             {
                 return;
             }
 
-            var newValue = CurrentValue;
+            var newValue = StringValue;
 
-            if (CurrentValue == "0" || (CurrentValue == "0" && value == "0"))
+            if (StringValue == ErrorState  || StringValue == "0" || (StringValue == "0" && value == "0"))
             {
                 newValue = string.Empty;
             }
@@ -58,59 +76,130 @@ namespace SimpleCalc.VMs
 
             if (double.TryParse(newValue, out var result))
             {
-                CurrentValue = newValue;
+                StringValue = newValue;
             }
+        }
+
+        public void CancelTapHandler()
+        {
+            Reset();
         }
 
         public void DecimalTapHandler()
         {
-            if (CurrentValue.Length == 10 || CurrentValue.Contains("."))
+            BeforeInput();
+
+            if (StringValue.Length == MaxLength || StringValue.Contains("."))
             {
                 return;
             }
 
-            CurrentValue += ".";
+            StringValue += ".";
         }
 
         public void SignTapHandler()
         {
-            if (CurrentValue.StartsWith("-"))
-            {
-                CurrentValue = CurrentValue.Substring(1);
-                return;
-            }
-
-            if (CurrentValue.Length == 10)
+            if (StringValue == ErrorState || StringValue == "0" || !IsInputValid)
             {
                 return;
             }
 
-            CurrentValue = "-" + CurrentValue;
+            if (StringValue.StartsWith("-"))
+            {
+                StringValue = StringValue.Substring(1);
+                return;
+            }
+
+            if (StringValue.Length == MaxLength)
+            {
+                return;
+            }
+
+            StringValue = "-" + StringValue;
         }
 
         public void AddTapHandler()
         {
-       
+            ApplyPendingOperation(Operations.Add);
         }
 
         public void SubtractTapHandler()
         {
-
+            ApplyPendingOperation(Operations.Subtract);
         }
 
         public void DivideTapHandler()
         {
-
+            ApplyPendingOperation(Operations.Divide);
         }
 
         public void MultiplyTapHandler()
         {
-
+            ApplyPendingOperation(Operations.Multiply);
         }
 
         public void EqualsTapHandler()
         {
+            ApplyPendingOperation(Operations.None);
+        }
 
+        private void BeforeInput()
+        {
+            if (_resetInput)
+            {
+                StringValue = "0";
+                _resetInput = false;
+            }
+        }
+
+        private void ApplyPendingOperation(Operations nextOperation)
+        {
+            try
+            {
+                switch (_operation)
+                {
+                    case Operations.Add:
+                        StringValue = (_resultValue + Value).ToString();
+                        break;
+                    case Operations.Subtract:
+                        StringValue = (_resultValue - Value).ToString();
+                        break;
+                    case Operations.Multiply:
+                        StringValue = (_resultValue * Value).ToString();
+                        break;
+                    case Operations.Divide:
+                        if (Value == 0)
+                        {
+                            SetError();
+                            break;
+                        }
+                        StringValue = (_resultValue / Value).ToString();
+                        break;
+                }
+
+                _resultValue = Value;
+                _resetInput = true;
+            }
+            catch
+            {
+                SetError();
+            }
+
+            _operation = nextOperation;
+        }
+
+        private void SetError()
+        {
+            Reset();
+
+            StringValue = ErrorState;
+        }
+
+        private void Reset()
+        {
+            _resultValue = 0;
+            StringValue = "0";
+            _operation = Operations.None;
         }
     }
 }
